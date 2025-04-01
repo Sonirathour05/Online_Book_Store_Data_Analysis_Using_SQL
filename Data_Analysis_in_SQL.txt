@@ -1,0 +1,97 @@
+Questions to answer for this milestone:
+
+1) Retrieve all books from in the "fiction" genre
+select * from books
+where Genre = "Fiction";
+--------------------------------------------------------
+2) Find books published after the year 1950
+select * from books
+where Published_Year>1950;
+--------------------------------------------------------
+3) List all custormers from the Canada
+ select * from customers
+where Country = "Canada";
+--------------------------------------------------------
+4) Show Orders Placed in November 2023
+select * from orders
+where order_date between '2023-01-11' AND '2023-11-30';
+--------------------------------------------------------
+5) Retrieve the total stock of books available 
+ select sum(stock) as total_stock
+ from books;
+--------------------------------------------------------
+6) Find the details of most the expensive book
+ select * from books
+ order by price desc limit 1;
+ --------------------------------------------------------
+7)Show all customers who ordered more than 1 quantity of book
+select * from orders
+where quantity >1;
+--------------------------------------------------------
+8) Retrieve all orders where the total amount exceeds $20.
+select * from orders
+where Total_Amount>20;
+--------------------------------------------------------
+9)List all genres available in the books table
+select distinct Genre 
+from books;
+--------------------------------------------------------
+10) Find the book with the lowest stock
+select * from books
+order by stock 
+limit 1;
+--------------------------------------------------------
+11) Calculate the total revenue generated from the orders
+select sum(Total_Amount) 
+ from orders;
+--------------------------------------------------------
+12) Retrieve the total number of books sold for each genre.
+Select b.Genre, o.Quantity
+ From Books b Join Orders o
+ On b.book_Id = o.book_Id
+Group by b.Genre;
+ --------------------------------------------------------
+13)Find the average price of books in the "Fantasy" Genre
+ Select Genre, avg(price) 
+ from books
+ where Genre="Fantasy";
+--------------------------------------------------------
+14) List Customers who have placed at least 2 orders
+select o.customer_id , c.Name ,count(o.order_id) 
+from orders o join customers c 
+On c.customer_id = o.customer_id 
+group by o.Customer_id, c.Name
+ having count(o.order_id)>=2;
+--------------------------------------------------------
+15) Find the most frequently ordered book
+select o.Book_id , b.title ,count(o.order_id) as order_count
+from orders o join books b
+On b.book_id = b.book_id
+group by o.book_id , b.title
+order by order_count desc limit 1;
+--------------------------------------------------------
+16) Show the top 3 most expensive books of "fantasy" genre
+Select * from books
+where Genre = "Fantasy"
+order by price desc limit 3;
+--------------------------------------------------------
+17) Retrieve the total quantity of books sold by each author
+Select b.Author , sum(o.quantity) as books_sold
+From books b join orders o 
+On b.Book_ID = o.Book_ID
+group by b.Author;
+--------------------------------------------------------
+18) List the cities where customers who spent over $30 are located.
+select distinct(c.city) , o.Total_Amount 
+From customers c Join orders o
+On c.customer_id = o.customer_id
+where o.Total_Amount > 30;
+
+
+
+
+
+
+
+
+ 
